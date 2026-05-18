@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- META TAGS -->
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+  content="width=device-width, initial-scale=1.0">
+
+  <!-- TITLE -->
+
+  <title>
+    Resume Builder
+  </title>
+
+  <!-- CSS FILE -->
+
+  <link rel="stylesheet"
+  href="/static/style.css">
+
+  <!-- PDF LIBRARY -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+</head>
+
+<body>
+
+  <!-- TOPBAR -->
+
+  <div class="topbar">
+
+    <!-- LOGO -->
+
+    <div class="logo">
+
+      <div class="logo-icon">
+        ✦
+      </div>
+
+      Resume<span>AI</span>
+
+      <em>
+        / Builder
+      </em>
+
+    </div>
+
+    <!-- TOP BUTTONS -->
+
+    <div class="top-actions">
+
+      <!-- ATS TEMPLATE -->
+
+      <button class="template-btn active"
+      id="btn-ats"
+      onclick="setTemplate('ats')">
+
+        ATS
+
+      </button>
+
+      <!-- MODERN TEMPLATE -->
+
+      <button class="template-btn"
+      id="btn-modern"
+      onclick="setTemplate('modern')">
+
+        Modern
+
+      </button>
+
+      <!-- MINIMAL TEMPLATE -->
+
+      <button class="template-btn"
+      id="btn-minimal"
+      onclick="setTemplate('minimal')">
+
+        Minimal
+
+      </button>
+
+      <!-- DOWNLOAD BUTTON -->
+
+      <button class="download-btn"
+      onclick="downloadResume()">
+
+        Download PDF
+
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- MAIN SECTION -->
+
+  <div class="main">
+
+    <!-- LEFT PANEL -->
+
+    <div class="left">
+
+      <h2>
+        Resume Details
+      </h2>
+
+      <p>
+        Live preview updates while typing
+      </p>
+
+      <!-- PERSONAL INFO -->
+
+      <div class="section-label">
+        Personal Information
+      </div>
+
+      <!-- NAME -->
+
+      <div class="form-group">
+
+        <label>
+          Full Name
+        </label>
+
+        <input type="text"
+        id="name"
+        placeholder="Shivam Rai">
+
+      </div>
+
+      <!-- ROLE -->
+
+      <div class="form-group">
+
+        <label>
+          Role
+        </label>
+
+        <input type="text"
+        id="role"
+        placeholder="Frontend Developer">
+
+      </div>
+
+      <!-- EMAIL -->
+
+      <div class="form-group">
+
+        <label>
+          Email
+        </label>
+
+        <input type="text"
+        id="email"
+        placeholder="shivam@gmail.com">
+
+      </div>
+
+      <!-- PHONE -->
+
+      <div class="form-group">
+
+        <label>
+          Phone
+        </label>
+
+        <input type="text"
+        id="phone"
+        placeholder="+91 9876543210">
+
+      </div>
+
+      <!-- LINKS -->
+
+      <div class="section-label">
+        Links
+      </div>
+
+      <!-- LINKEDIN -->
+
+      <div class="form-group">
+
+        <label>
+          LinkedIn
+        </label>
+
+        <input type="text"
+        id="linkedin"
+        placeholder="linkedin.com/in/shivam">
+
+      </div>
+
+      <!-- GITHUB -->
+
+      <div class="form-group">
+
+        <label>
+          GitHub
+        </label>
+
+        <input type="text"
+        id="github"
+        placeholder="github.com/shivam">
+
+      </div>
+
+      <!-- LEETCODE -->
+
+      <div class="form-group">
+
+        <label>
+          LeetCode
+        </label>
+
+        <input type="text"
+        id="leetcode"
+        placeholder="leetcode.com/shivam">
+
+      </div>
+
+      <!-- RESUME CONTENT -->
+
+      <div class="section-label">
+        Resume Content
+      </div>
+
+      <!-- SUMMARY -->
+
+      <div class="form-group">
+
+        <label>
+          Professional Summary
+        </label>
+
+        <textarea id="summary"
+        placeholder="Write professional summary"></textarea>
+
+        <!-- AI SUMMARY BUTTON -->
+
+       <button
+       class="download-btn ai-btn"
+       id="generate-btn"
+      style="margin-top:10px; width:100%;">
+
+          Generate AI Summary
+
+        </button>
+
+      </div>
+
+      <!-- SKILLS -->
+
+      <div class="form-group">
+
+        <label>
+          Skills
+        </label>
+
+        <textarea id="skills"
+        placeholder="Python, HTML, CSS, JavaScript"></textarea>
+
+      </div>
+
+      <!-- EDUCATION -->
+
+      <div class="form-group">
+
+        <label>
+          Education
+        </label>
+
+        <textarea id="education"
+        placeholder="B.Tech CSE - Galgotias University"></textarea>
+
+      </div>
+
+      <!-- PROJECTS -->
+
+      <div class="form-group">
+
+        <label>
+          Projects
+        </label>
+
+        <textarea id="projects"
+        placeholder="AI Resume Maker, Weather App"></textarea>
+
+      </div>
+
+    </div>
+
+    <!-- RIGHT PANEL -->
+
+    <div class="right">
+
+      <div class="preview-label">
+
+        Live Preview
+
+      </div>
+
+      <!-- RESUME -->
+
+      <div class="resume tpl-ats"
+      id="resume">
+
+        <!-- HEADER -->
+
+        <div class="resume-header">
+
+          <!-- NAME -->
+
+          <div class="rh-name"
+          id="preview-name">
+
+            Shivam Rai
+
+          </div>
+
+          <!-- META -->
+
+          <div class="rh-meta">
+
+            <span id="preview-role">
+              Frontend Developer
+            </span>
+
+            <span>
+              •
+            </span>
+
+            <span id="preview-email">
+              shivam@gmail.com
+            </span>
+
+            <span>
+              •
+            </span>
+
+            <span id="preview-phone">
+              +91 9876543210
+            </span>
+
+          </div>
+
+          <!-- LINKS -->
+
+          <div class="rh-links">
+
+            <a class="rh-link"
+            id="preview-linkedin">
+
+              linkedin.com/in/shivam
+
+            </a>
+
+            <a class="rh-link"
+            id="preview-github">
+
+              github.com/shivam
+
+            </a>
+
+            <a class="rh-link"
+            id="preview-leetcode">
+
+              leetcode.com/shivam
+
+            </a>
+
+          </div>
+
+        </div>
+
+        <!-- SUMMARY SECTION -->
+
+        <div class="resume-section">
+
+          <div class="section-title">
+
+            Professional Summary
+
+          </div>
+
+          <p id="preview-summary">
+
+            Passionate software developer skilled in Python,
+            JavaScript and web technologies.
+
+          </p>
+
+        </div>
+
+        <!-- SKILLS SECTION -->
+
+        <div class="resume-section">
+
+          <div class="section-title">
+
+            Skills
+
+          </div>
+
+          <div class="skills-wrap"
+          id="preview-skills">
+
+            <div class="skill-tag">
+              Python
+            </div>
+
+            <div class="skill-tag">
+              HTML
+            </div>
+
+            <div class="skill-tag">
+              CSS
+            </div>
+
+            <div class="skill-tag">
+              JavaScript
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- EDUCATION SECTION -->
+
+        <div class="resume-section">
+
+          <div class="section-title">
+
+            Education
+
+          </div>
+
+          <p id="preview-education">
+
+            B.Tech Computer Science Engineering
+            - Galgotias University
+
+          </p>
+
+        </div>
+
+        <!-- PROJECT SECTION -->
+
+        <div class="resume-section">
+
+          <div class="section-title">
+
+            Projects
+
+          </div>
+
+          <p id="preview-projects">
+
+            AI Resume Maker,
+            Online Voting System,
+            Weather Analysis App
+
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- JS FILE -->
+
+  <script src="/static/script.js"></script>
+
+</body>
+
+</html>
